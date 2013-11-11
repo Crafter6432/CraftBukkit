@@ -808,7 +808,11 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
 
     public void sendPluginMessage(Plugin source, String channel, byte[] message) {
         StandardMessenger.validatePluginMessage(server.getMessenger(), source, channel, message);
-        if (getHandle().playerConnection == null) return;
+        while (getHandle().playerConnection == null){
+		try {
+			Thread.sleep(1);
+		} catch (InterruptedException e) {}                
+        }
 
         if (channels.contains(channel)) {
             Packet250CustomPayload packet = new Packet250CustomPayload();
