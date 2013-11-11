@@ -806,7 +806,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
         return conversationTracker.isConversing();
     }
 
-    public void sendPluginMessage(Plugin source, String channel, byte[] message) {
+    public boolean sendPluginMessage(Plugin source, String channel, byte[] message) {
         StandardMessenger.validatePluginMessage(server.getMessenger(), source, channel, message);
         if (channels.contains(channel) && getHandle().playerConnection != null) {
             Packet250CustomPayload packet = new Packet250CustomPayload();
